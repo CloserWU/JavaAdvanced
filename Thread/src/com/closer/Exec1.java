@@ -7,13 +7,15 @@ package com.closer;
  * currentThread() static 返回Thread,返回当前执行的线程
  * getName() 返回当前线程名字
  * setName(String) 设置当前线程名
- * yield() 释放CPU控制权
- * join() 调用的线程执行完毕后，才执行其他线程
+ * yield() 释放CPU控制权                         运行 -》就绪
+ * join() 调用的线程执行完毕后，才执行其他线程    阻塞 -》阻塞
  * stop() 强制结束线程 deprecated 已过时
- * sleep(long millis) 线程睡眠x毫秒
+ * sleep(long millis) 线程睡眠x毫秒              运行 -》阻塞
  * isAlive() 线程是否存活
  * getPriority();获取线程优先级 1 5 10 Max Norm Min
  * setPriority(int);设置线程优先级
+ * notify()                                      阻塞 -》就绪
+ * notifyAll()                                   阻塞 -》就绪
  *
  *
  * @author closer

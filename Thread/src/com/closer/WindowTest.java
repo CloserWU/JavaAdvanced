@@ -33,12 +33,23 @@ class Window extends Thread {
     @Override
     public void run() {
         while (true) {
+//            synchronized (Window.class)
             if (ticket > 0) {
                 System.out.println(getName() + "ticket" + ticket);
                 ticket--;
             } else {
                 break;
             }
+        }
+    }
+
+    /**
+     * 同步监视器不是this static中没有this， 是Window.class
+     */
+    public static synchronized void show () {
+        if (ticket > 0) {
+            System.out.println(Thread.currentThread().getName() + "ticket" + ticket);
+            ticket--;
         }
     }
 }
