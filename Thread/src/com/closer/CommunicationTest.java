@@ -3,15 +3,14 @@ package com.closer;
 /**
  * <p>CommunicationTest</p>
  * <p>description</p>
- *
+ * <p>
  * wait notify notifyAll 定义在Object类中
- *
+ * <p>
  * wait notify notifyAll 的调用者必须是同步代码块或同步方法中的同步监视器
  * 否者 异常
- *
+ * <p>
  * sleep 和 wait的异同
  * sleep可以在任何场景下用，wait只能在同步代码块中
- *
  *
  * @author closer
  * @version 1.0.0
