@@ -2,6 +2,8 @@ package com.closer;
 
 import org.junit.Test;
 
+import java.util.Arrays;
+
 /**
  * <p>StringExec</p>
  * <p>description</p>
@@ -77,24 +79,31 @@ public class StringExec {
     }
 
 
-    public String getMaxSameString(String str1, String str2) {
+    public String[] getMaxSameString(String str1, String str2) {
         String maxStr = (str1.length() > str2.length()) ? str1 : str2;
         String minStr = (str1.length() <= str2.length()) ? str1 : str2;
         int epoch = minStr.length();
+        StringBuilder sb = new StringBuilder();
         for (int i = 0; i < epoch; i++) {
             for (int j = 0; j <= i; j++) {
-                String subStr = minStr.substring(j, epoch - 1 - i + j);
+                System.out.print(i);
+                System.out.println(" " + j);
+                String subStr = minStr.substring(j, epoch - i + j);
                 if (maxStr.contains(subStr)) {
-                    return subStr;
+                    sb.append(subStr + ",");
                 }
             }
+            if (sb.length() != 0) {
+                break;
+            }
         }
-        return null;
+        String[] res = sb.toString().replaceAll(".$", "").split("\\,");
+        return res;
     }
 
     @Test
     public void test3() {
-        System.out.println(getMaxSameString("hellooWorld", "helloWorld"));
+        System.out.println(Arrays.asList(getMaxSameString("hellopWorld", "helloWorld")));
     }
 }
 
