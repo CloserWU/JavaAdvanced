@@ -60,7 +60,7 @@ public class StringTest1 {
 
         String s3 = "javac++";
         String s4 = "java" + "c++";
-        String s5 = s1 + "c++";  //相当于new出来的  堆 s5指向堆
+        String s5 = s1 + "c++";  //相当于new出来的  堆 s5指向堆  拼接的都在堆里
         String s6 = "java" + s2;
 
         String s7 = s5.intern(); // intern 返回的的常量池的地址
@@ -88,5 +88,17 @@ public class StringTest1 {
         System.out.println(s.str); //good
         System.out.println(s.ch); //best
     }
-}
 
+    @Test
+    public void test4() {
+        String s0 = "javaee";
+        final String s = "java";  // 常量和常量的拼接 结果仍在常量池
+        String s1 = s + "ee";
+        System.out.println(s0 == s1);
+
+        String s3 = "java";
+        String s4 = s3 + "ee";
+        System.out.println(s1 == s4);
+
+    }
+}
