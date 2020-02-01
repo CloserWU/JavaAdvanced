@@ -13,14 +13,13 @@ import java.util.*;
  */
 public class Main {
     public static void main(String[] args) {
-        List<Message> received = List.of(
-                new Message(1, "Hello!"),
-                new Message(2, "发工资了吗？"),
-                new Message(2, "发工资了吗？"),
-                new Message(3, "去哪吃饭？"),
-                new Message(3, "去哪吃饭？"),
-                new Message(4, "Bye")
-        );
+        List<Message> received = new ArrayList<>();
+        received.add(new Message(1, "Hello!"));
+        received.add(new Message(2, "发工资了吗？"));
+        received.add(new Message(3, "发工资了吗!"));
+        received.add(new Message(4, "去哪吃饭!"));
+        received.add(new Message(5, "去哪吃饭!"));
+        received.add(new Message(6, "Bye!"));
         List<Message> displayMessages = process(received);
         for (Message message : displayMessages) {
             System.out.println(message.text);
