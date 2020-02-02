@@ -13,6 +13,9 @@ public class Person {
     private Double price;
     private String name;
 
+    public Person() {
+    }
+
     public Person(Double price, String name) {
         this.price = price;
         this.name = name;
@@ -43,14 +46,32 @@ public class Person {
     }
 
     @Override
-    public boolean equals(Object obj) {
-        Person p = (Person) obj;
-        if (p.name.equals(this.name)) {
-            if (p.price.equals(this.price)) {
-                return true;
-            }
+    public boolean equals(Object o) {
+        System.out.println("Person  Euals");
+        if (this == o) {
+            return true;
         }
-        return false;
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        Person person = (Person) o;
+
+        if (price != null ? !price.equals(person.price) : person.price != null) {
+            return false;
+        }
+        return name != null ? name.equals(person.name) : person.name == null;
+    }
+
+    /**
+     * 31 = 2 << 5 - 1, 且为质数
+     * @return
+     */
+    @Override
+    public int hashCode() {
+        int result = price != null ? price.hashCode() : 0;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        return result;
     }
 }
 
