@@ -1,7 +1,5 @@
 package com.closer;
 
-import org.junit.Test;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -15,10 +13,14 @@ import java.io.InputStreamReader;
  * @date 2020-02-02 09:52
  */
 public class RunTimeTest {
-    @Test
-    public void test1() {
+    /**
+     * main中能找到文件
+     * test测试中找不到相对目录文件
+     * @param args
+     */
+    public static void main(String[] args) {
         String userName = "CloserWU";
-        String[] args1 = new String[] { "python", "D:\\python用\\python1\\StudyPython\\Spider.py", userName };
+        String[] args1 = new String[] { "python", "./CommonClass/resources/Spider.py", userName };
         Process proc;
         try {
             // 执行py文件
