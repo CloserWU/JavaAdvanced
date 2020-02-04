@@ -56,6 +56,7 @@ public class Hello {
     }
 
     private static void printClassInfo(Class cls) {
+        System.out.println("-------------");
         System.out.println("Class name: " + cls.getName());
         System.out.println("Simple name: " + cls.getSimpleName());
         if (cls.getPackage() != null) {
@@ -65,6 +66,7 @@ public class Hello {
         System.out.println("is enum: " + cls.isEnum());
         System.out.println("is array: " + cls.isArray());
         System.out.println("is primitive: " + cls.isPrimitive());
+        System.out.println("-------------");
     }
 }
 

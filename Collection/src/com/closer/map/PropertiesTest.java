@@ -18,7 +18,7 @@ public class PropertiesTest {
     @Test
     public void test1() throws IOException {
         Properties properties = new Properties();
-        FileInputStream fis = new FileInputStream("./Collection/resources/jdbc.properties");
+        FileInputStream fis = new FileInputStream("resources/jdbc.properties");
         properties.load(fis);
         String name = properties.getProperty("name");
         String password = properties.getProperty("password");
