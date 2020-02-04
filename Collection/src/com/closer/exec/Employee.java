@@ -8,7 +8,7 @@ package com.closer.exec;
  * @version 1.0.0
  * @date 2020-02-02 20:56
  */
-public class Employee implements Comparable{
+public class Employee implements Comparable<Employee> {
     private String name;
     private int age;
     private MyDate birthday;
@@ -56,10 +56,10 @@ public class Employee implements Comparable{
     }
 
 
+
     @Override
-    public int compareTo(Object o) {
-        Employee e = (Employee) o;
-        return e.getBirthday().compareTo(this.getBirthday());
+    public int compareTo(Employee o) {
+        return o.getBirthday().compareTo(this.getBirthday());
     }
 }
 
