@@ -1,42 +1,48 @@
 import requests
 from bs4 import BeautifulSoup
+import random
 import json
 import sys
-# price = json.loads('{"low":"120","high":"250"}')
-# print(price)
-# r = requests.post("http://47.107.37.58:8080/SSM-JSON/goods/searchprice", json=price)
-# print(r.status_code)
-# print(r.request)
-# demo = r.text
-# r_json = json.loads(demo)
-# print(r_json)
-#
-# print(r_json['goods'])
 
-#
-# print("=====================================")
-# r = requests.get("https://github.com/CloserWU")
-# print(r.status_code)
-# # print(r.text)
-# soup = BeautifulSoup(r.text, "html.parser")
-# print(soup.rect)
 
-# f = open('test.html', 'r', encoding='utf-8')
-# soup = BeautifulSoup(f.read(), "html.parser")
-# print(soup.prettify())
-# lists = soup.find_all('rect')
-# count = 0
-# print(soup.find_all('rect'))
-# for i in range(len(lists)) :
-#     # print(lists[i])
-#     item = lists[i]
-#     count += int(item['data-count'])
+class Response:
+    def __init__(self, code, body):
+        self.code = code
+        self.body = body
+
+    def response(self):
+        response = {
+            "code": self.code,
+            "body": self.body
+        }
+        return response
 
 
 class GitHubCommit:
+    def __init__(self, name):
+        self.name = name
+        self.url = 'https://github.com/' + name
+        self.headers = [
+            "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36",
+            "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.153 Safari/537.36",
+            "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:30.0) Gecko/20100101 Firefox/30.0",
+            "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_2) AppleWebKit/537.75.14 (KHTML, like Gecko) Version/7.0.3 Safari/537.75.14",
+            "Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; Win64; x64; Trident/6.0)",
+            'Mozilla/5.0 (Windows; U; Windows NT 5.1; it; rv:1.8.1.11) Gecko/20071127 Firefox/2.0.0.11',
+            'Opera/9.25 (Windows NT 5.1; U; en)',
+            'Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; .NET CLR 1.1.4322; .NET CLR 2.0.50727)',
+            'Mozilla/5.0 (compatible; Konqueror/3.5; Linux) KHTML/3.5.5 (like Gecko) (Kubuntu)',
+            'Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.8.0.12) Gecko/20070731 Ubuntu/dapper-security Firefox/1.5.0.12',
+            'Lynx/2.8.5rel.1 libwww-FM/2.14 SSL-MM/1.4.1 GNUTLS/1.2.9',
+            "Mozilla/5.0 (X11; Linux i686) AppleWebKit/535.7 (KHTML, like Gecko) Ubuntu/11.04 Chromium/16.0.912.77 Chrome/16.0.912.77 Safari/535.7",
+            "Mozilla/5.0 (X11; Ubuntu; Linux i686; rv:10.0) Gecko/20100101 Firefox/10.0 "
+        ]
 
-    def calcu(self, userName):
-        r = requests.get("https://github.com/" + str(userName))
+    def get_response(self):
+        headers = {
+            "User-Agent": random.choice(self.headers)
+        }
+        r = requests.get("https://github.com/" + str(self.name), headers = headers)
         print(r.status_code)
         soup = BeautifulSoup(r.text, "html.parser")
         # f = open('test.html', 'r', encoding='utf-8')
@@ -47,12 +53,18 @@ class GitHubCommit:
             # print(lists[i])
             item = lists[i]
             count += int(item['data-count'])
-
-        return str(count)
+            lists[i] = str(lists[i])
+        body = {
+            "count": count,
+            "lists": lists
+        }
+        response = Response(r.status_code, body)
+        return json.dumps(response.__dict__)
 
 
 if __name__ == '__main__':
     userName = str(sys.argv[1])
-    main = GitHubCommit()
-    print(main.calcu(userName))
+    # userName = "CloserWU"
+    main = GitHubCommit(userName)
+    print(main.get_response())
 
